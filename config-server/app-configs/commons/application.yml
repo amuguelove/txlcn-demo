@@ -1,0 +1,31 @@
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:9000/eureka/}
+    healthcheck:
+      enabled: true
+    enabled: ${EUREKA_ENABLED:true}
+
+application:
+  services:
+    orderUrl: http://order-service
+    inventoryUrl: http://inventory-service
+    paymentUrl: http://payment-service
+
+##### mybatis-plus配置
+#字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+mybatis-plus:
+  global-config:
+    db-config:
+      field-strategy: NOT_NULL
+      logic-delete-value: 1   #逻辑删除配置
+      logic-not-delete-value: 0
+
+  configuration:
+    map-underscore-to-camel-case: true   # 原生配置
+    cache-enabled: false

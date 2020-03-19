@@ -1,0 +1,8 @@
+rootProject.name = 'gradle-springboot-lab'
+
+include 'common-base'
+include 'config-server'
+include 'order-service'
+include 'inventory-service'
+include 'payment-service'
+include 'txlcn-tm'

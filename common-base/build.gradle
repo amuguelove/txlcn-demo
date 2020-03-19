@@ -1,0 +1,56 @@
+bootJar.enabled = false
+jar.enabled = true
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+
+    // spring boot common libs
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.data:spring-data-commons')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    // redis
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.springframework.session:spring-session-data-redis')
+
+    // spring cloud
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
+    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+    // common libs
+    compile("io.github.openfeign:feign-jackson:10.2.0")
+    compile('org.modelmapper:modelmapper:2.3.5')
+    compile('org.apache.commons:commons-pool2:2.6.0')
+    compile('org.apache.commons:commons-lang3:3.8')
+    compile('org.apache.commons:commons-collections4:4.2')
+    compile('com.google.guava:guava:26.0-jre')
+
+    // shedlock
+    compile('net.javacrumbs.shedlock:shedlock-spring:4.1.0')
+    compileOnly('net.javacrumbs.shedlock:shedlock-provider-redis-spring:4.1.0')
+
+    // jackson
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8')
+
+    // reactor
+    compile('io.projectreactor:reactor-core:3.2.6.RELEASE')
+    compile('io.projectreactor.addons:reactor-extra:3.2.2.RELEASE')
+
+    // swagger
+    compile('io.springfox:springfox-swagger2:2.9.2')
+    compile('io.springfox:springfox-swagger-ui:2.9.2')
+
+    // test
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("io.rest-assured:spring-mock-mvc:3.3.0")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}

@@ -1,0 +1,44 @@
+server:
+  port: 9080
+logging:
+  level:
+    org.springframework.cloud: INFO
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/amuguelove/txlcn-demo.git
+          search-paths: 'config-server/app-configs/commons,config-server/app-configs/{application}'
+          default-label: master
+          clone-on-start: true
+          force-pull: true
+          timeout: 20
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: SYSTEM
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 3
+  client:
+    serviceUrl:
+      defaultZone: "${EUREKA_DEFAULT_ZONE:http://localhost:9000/eureka/}"
+    healthcheck:
+      enabled: true
+
+management:
+  server:
+    port: 0
+  endpoints:
+    enabled-by-default: false
+
+encrypt:
+  key: ${ENCRYPT_KEY:test!23Abc}

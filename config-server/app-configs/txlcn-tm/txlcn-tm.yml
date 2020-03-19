@@ -1,0 +1,9 @@
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true

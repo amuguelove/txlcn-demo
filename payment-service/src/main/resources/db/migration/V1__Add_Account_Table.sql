@@ -1,0 +1,13 @@
+
+DROP TABLE IF EXISTS `tb_account`;
+
+CREATE TABLE `tb_account` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL COMMENT '用户账号',
+  `balance` INT(11) NOT NULL DEFAULT 0 COMMENT '余额',
+  `credit` INT(11) NOT NULL DEFAULT 0 COMMENT '信用额度',
+  `created_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_username` (`username`)
+);

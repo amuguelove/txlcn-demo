@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: order-service
+
+  cloud:
+    config:
+      uri: ${CLOUD_CONFIG_ADDRESS:http://localhost:9080}
+      username: admin
+      password: admin
+      fail-fast: true
+      retry:
+        max-attempts: 5
+        max-interval: 5000
+      label: ${CLOUD_CONFIG_LABEL:master}
+
+  profiles:
+    active: local
+
+logging:
+  config: classpath:${LOGBACK_CONFIG_FILE:logback-spring-local.xml}
+
+server:
+  port: 8080
+
+feign:
+  client:
+    enabled: true

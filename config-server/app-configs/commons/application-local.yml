@@ -1,0 +1,36 @@
+
+
+# ------------- DB ------------
+
+mysql:
+  address: ${LOCAL_ADDRESS:localhost}
+  username: root
+  password: password
+
+# ------------- DB ------------
+
+
+# ------------- config ------------
+
+spring:
+  session:
+    store-type: redis
+
+  redis:
+    host: ${LOCAL_ADDRESS:localhost}
+    port: 6379
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate.format_sql: false
+
+  cloud:
+    config:
+      allowOverride: true
+      overrideNone: true
+      overrideSystemProperties: true
+    bus:
+      enabled: false
+
+# ------------- config ------------

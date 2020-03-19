@@ -1,0 +1,75 @@
+plugins {
+    id "java"
+    id "idea"
+    id "checkstyle"
+    id "org.springframework.boot" version "2.2.2.RELEASE"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+    id "io.freefair.lombok" version "4.1.6"
+}
+
+bootJar.enabled = false
+
+allprojects {
+    ext {
+        set('springCloudVersion', 'Hoxton.RELEASE')
+        set('springBootVersion', '2.2.2.RELEASE')
+    }
+
+    repositories {
+        maven {
+            url "https://maven.aliyun.com/repository/central"
+        }
+        mavenCentral()
+        jcenter()
+
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
+    }
+
+    group 'com.flygopher.example'
+    version '1.0.0'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) { options.encoding = 'utf-8' }
+
+    wrapper {
+        gradleVersion = '6.0.1'
+    }
+}
+
+// 配置所有子模块
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'io.freefair.lombok'
+
+    dependencies {
+        // 引入根目录和各子项目下的libs中的jar包
+        ext.jarTree = fileTree(dir: 'libs', include: '**/*.jar')
+        ext.rootProjectLibs = new File(rootProject.rootDir, 'libs').getAbsolutePath()
+        ext.jarTree += fileTree(dir: rootProjectLibs, include: '**/*.jar')
+
+        compile jarTree
+
+        // 测试依赖
+        testCompile(
+                'junit:junit:4.12',
+                'org.springframework:spring-test',
+                'org.assertj:assertj-core:3.11.1',
+                'org.mockito:mockito-core:2.23.0',
+        )
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
+
