@@ -1,4 +1,4 @@
-rootProject.name = 'gradle-springboot-lab'
+rootProject.name = 'txlcn-demo'
 
 include 'common-base'
 include 'config-server'
